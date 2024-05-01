@@ -1,4 +1,4 @@
-module github.com/DenisMathan/codingChallengeGuteFrage
+module github.com/DenisMathan/GuteFrageChallenge
 
 go 1.21.3
 
