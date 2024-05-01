@@ -18,9 +18,10 @@ type Database struct {
 	Name     string `envconfig:"DB_NAME" required:"true"`
 }
 
-func GetConfig() Config {
-	_ = godotenv.Load("../.env")
+func GetConfig() (Config, error) {
+	err := godotenv.Load("../.env")
+
 	cnf := Config{}
 	envconfig.Process("", &cnf)
-	return cnf
+	return cnf, err
 }
