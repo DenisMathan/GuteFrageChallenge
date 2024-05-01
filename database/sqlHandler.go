@@ -7,8 +7,8 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/DenisMathan/codingChallengeGuteFrage/configurations"
-	"github.com/DenisMathan/codingChallengeGuteFrage/entities"
+	"github.com/DenisMathan/GuteFrageChallenge/configurations"
+	"github.com/DenisMathan/GuteFrageChallenge/entities"
 )
 
 type SqlHandler struct {

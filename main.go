@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/DenisMathan/codingChallengeGuteFrage/api"
+	"github.com/DenisMathan/GuteFrageChallenge/api"
 )
 
 func main() {

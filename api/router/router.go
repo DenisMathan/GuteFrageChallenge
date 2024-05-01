@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/DenisMathan/codingChallengeGuteFrage/entities"
+	"github.com/DenisMathan/GuteFrageChallenge/entities"
 	"github.com/gorilla/mux"
 )
 

@@ -4,9 +4,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/DenisMathan/codingChallengeGuteFrage/api/router"
-	"github.com/DenisMathan/codingChallengeGuteFrage/configurations"
-	"github.com/DenisMathan/codingChallengeGuteFrage/database"
+	"github.com/DenisMathan/GuteFrageChallenge/api/router"
+	"github.com/DenisMathan/GuteFrageChallenge/configurations"
+	"github.com/DenisMathan/GuteFrageChallenge/database"
 )
 
 type server struct {
