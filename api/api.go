@@ -15,12 +15,7 @@ type server struct {
 	cfg configurations.Config
 }
 
-func NewServer() server {
-	cfg, err := configurations.GetConfig()
-	if err != nil {
-		log.Fatal("Setup .env File correctly!")
-		panic(err)
-	}
+func NewServer(cfg configurations.Config) server {
 	sqlHandler := database.NewSqlHandler(cfg.Database)
 	return server{
 		app: &http.Server{Addr: ":" + cfg.ServerPort, Handler: router.NewRouter(&sqlHandler)},

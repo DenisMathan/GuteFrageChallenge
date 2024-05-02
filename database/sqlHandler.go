@@ -20,6 +20,7 @@ func builddsn(cfg configurations.Database) string {
 		"%s:%s@tcp(%s:%d)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		cfg.User, cfg.Password, cfg.Host, cfg.Port, cfg.Name,
 	)
+	log.Println(dsn)
 	return dsn
 }
 
@@ -40,12 +41,12 @@ func (handler *SqlHandler) GetTodos(onlyDone bool, pagination int, nth int) []en
 	var rows *sql.Rows
 	var err error
 	if onlyDone {
-		rows, err = handler.db.Query("SELECT * FROM todos Where done = true Limit ? OFFSET ?", pagination, pagination*nth)
+		rows, err = handler.db.Query("SELECT * FROM todos WHERE done = true LIMIT ? OFFSET ?", pagination, pagination*nth)
 		if err != nil {
 			log.Println(err)
 		}
 	} else {
-		rows, err = handler.db.Query("SELECT * FROM todos Limit ? OFFSET ?", pagination, pagination*nth)
+		rows, err = handler.db.Query("SELECT * FROM todos LIMIT ? OFFSET ?", pagination, pagination*nth)
 		if err != nil {
 			log.Println(err)
 		}
@@ -54,16 +55,21 @@ func (handler *SqlHandler) GetTodos(onlyDone bool, pagination int, nth int) []en
 		log.Println(err)
 	}
 	results := []entities.Todo{}
-	for rows.Next() {
-		var description string
-		var done bool
-		err = rows.Scan(&description, &done)
-		if err != nil {
-			panic(err.Error())
+	if rows != nil {
+		for rows.Next() {
+			var id uint
+			var description string
+			var done bool
+			err = rows.Scan(&id, &description, &done)
+			if err != nil {
+				panic(err)
+			}
+			results = append(results, entities.Todo{ID: id, Description: description, Done: done})
 		}
-		results = append(results, entities.Todo{Description: description[0:15], Done: done})
+
+		defer rows.Close()
 	}
-	defer rows.Close()
+	log.Println(results)
 	return results
 }
 

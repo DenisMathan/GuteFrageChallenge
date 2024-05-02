@@ -44,6 +44,8 @@ func fillContext(next http.Handler, sqlHandler SqlHandler) http.Handler {
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
+		w.Header().Set("Content-Type", "application/json")
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 		if r.Method == "OPTIONS" {
 			w.WriteHeader(http.StatusOK)
 			return
